@@ -18,7 +18,7 @@ export default function SettingAction(props: {
   return (
     <div class="text-sm text-slate-7 dark:text-slate mb-2">
       <Show when={shown()}>
-        <SettingItem icon="i-ri:lock-password-line" label="网站密码">
+        <SettingItem icon="i-ri:lock-password-line" label="Website Password">
           <input
             type="password"
             value={props.setting().password}
@@ -44,7 +44,7 @@ export default function SettingAction(props: {
             }}
           />
         </SettingItem>
-        <SettingItem icon="i-carbon:user-online" label="系统角色指令">
+        <SettingItem icon="i-carbon:user-online" label="System role command">
           <input
             type="text"
             value={props.setting().systemRule}
@@ -57,7 +57,10 @@ export default function SettingAction(props: {
             }}
           />
         </SettingItem>
-        <SettingItem icon="i-carbon:data-enrichment" label="思维发散程度">
+        <SettingItem
+          icon="i-carbon:data-enrichment"
+          label="Degree of thought divergence"
+        >
           <input
             type="range"
             min={0}
@@ -76,7 +79,7 @@ export default function SettingAction(props: {
         </SettingItem>
         <SettingItem
           icon="i-carbon:save-image"
-          label="记录对话内容，刷新不会消失"
+          label="Record the content of the conversation, refresh will not disappear"
         >
           <label class="relative inline-flex items-center cursor-pointer ml-1">
             <input
@@ -95,7 +98,7 @@ export default function SettingAction(props: {
         </SettingItem>
         <SettingItem
           icon="i-carbon:3d-curve-auto-colon"
-          label="开启连续对话，将加倍消耗 Token"
+          label="Opening a continuous dialogue will double the Token consumption"
         >
           <label class="relative inline-flex items-center cursor-pointer ml-1">
             <input
@@ -120,7 +123,7 @@ export default function SettingAction(props: {
             setShown(!shown())
           }}
           icon="i-carbon:settings"
-          label="设置"
+          label="Settings"
         />
         <div class="flex">
           <ActionItem
@@ -134,10 +137,10 @@ export default function SettingAction(props: {
                 ? "i-ri:check-fill dark:text-yellow text-yellow-6"
                 : "i-carbon:image"
             }
-            label="导出图片"
+            label="Export image"
           />
           <ActionItem
-            label="导出 Markdown"
+            label="Export Markdown"
             onClick={async () => {
               await exportMD(props.messaages)
               setCopied(true)
@@ -152,12 +155,12 @@ export default function SettingAction(props: {
           <ActionItem
             onClick={props.reAnswer}
             icon="i-carbon:reset"
-            label="重新回答"
+            label="Reply again"
           />
           <ActionItem
             onClick={props.clear}
             icon="i-carbon:trash-can"
-            label="清空对话"
+            label="Clear the conversation"
           />
         </div>
       </div>
@@ -222,8 +225,8 @@ async function exportJpg() {
 
 async function exportMD(messages: ChatMessage[]) {
   const role = {
-    system: "系统",
-    user: "我",
+    system: "System",
+    user: "I",
     assistant: "ChatGPT"
   }
   await copyToClipboard(
