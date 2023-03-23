@@ -63,21 +63,23 @@ export const post: APIRoute = async context => {
     }
 
     if (pwd && pwd !== password) {
-      throw new Error("密码错误，请联系网站管理员。")
+      throw new Error("Wrong password, please contact the webmaster.")
     }
 
     if (!messages?.length) {
-      throw new Error("没有输入任何文字。")
+      throw new Error("No text was entered.")
     } else {
       const content = messages.at(-1)!.content.trim()
-      if (content.startsWith("查询填写的 Key 的余额")) {
+      if (content.startsWith("Check the balance of the filled Key")) {
         if (key !== localKey) {
           const billings = await Promise.all(
             splitKeys(key).map(k => fetchBilling(k))
           )
           return new Response(await genBillingsTable(billings))
         } else {
-          throw new Error("没有填写 OpenAI API key，不会查询内置的 Key。")
+          throw new Error(
+            "If you do not fill in the OpenAI API key, the built-in key will not be queried."
+          )
         }
       } else if (content.startsWith("sk-")) {
         const billings = await Promise.all(
@@ -89,7 +91,10 @@ export const post: APIRoute = async context => {
 
     const apiKey = randomKey(splitKeys(key))
 
-    if (!apiKey) throw new Error("没有填写 OpenAI API key，或者 key 填写错误。")
+    if (!apiKey)
+      throw new Error(
+        "The OpenAI API key is not filled in, or the key is filled in incorrectly."
+      )
 
     const tokens = messages.reduce((acc, cur) => {
       const tokens = countTokens(cur.content)
@@ -99,9 +104,9 @@ export const post: APIRoute = async context => {
     if (tokens > (Number.isInteger(maxTokens) ? maxTokens : 3072)) {
       if (messages.length > 1)
         throw new Error(
-          `由于开启了连续对话选项，导致本次对话过长，请清除部分内容后重试，或者关闭连续对话选项。`
+          `Please clear the content and try again, or turn off the continuous dialogue option.`
         )
-      else throw new Error("太长了，缩短一点吧。")
+      else throw new Error("It's too long, shorten it a bit.")
     }
 
     const encoder = new TextEncoder()
@@ -226,7 +231,7 @@ export async function genBillingsTable(billings: Billing[]) {
     )
     .join("\n")
 
-  return `| Key  | 剩余 | 已用 | 总额度 |
+  return `| Key | Remaining | Used | Total Amount |
 | ---- | ---- | ---- | ------ |
 ${table}
 `
