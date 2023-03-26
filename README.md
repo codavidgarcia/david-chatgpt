@@ -4,14 +4,6 @@
 
 > This project is developed based on [chatgpt-demo](https://github.com/ddiu8081/chatgpt-demo).
 
-Online preview.
-
-1. [chatsverse.xyz](https://www.chatsverse.xyz) by [@Airyland](https://m.okjike.com/users/C6C8DE3A-E89D-4978-9E7D-B2E167D835A9) for free.
-2. ~~[aitoolgpt.com](https://www.aitoolgpt.com), developed by [@AUDI_GUZZ](https://m.okjike.com/users/4af3cfb4-1291-4a8b-b210-f515c86934a9) for free~ ~. (2022.03.22 died a heroic death, remind everyone not to over-share their site out, may be ChatGPT said what forbidden words out).
-3. [vercel.app](https://vercel-chatgpt-github.vercel.app) was walled.
-
-API Key is provided by myself for free, please don't abuse it, no long term service is provided, please deploy it by yourself.
-
 ## Usage
 
 - Setting
